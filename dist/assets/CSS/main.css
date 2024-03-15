@@ -1,0 +1,28 @@
+@import './base.css';
+#app {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 0 auto;
+  font-weight: normal;
+  /* ancho pantalla telefono */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.container-body {
+  flex-grow: 1;
+}
+a,
+.white {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  transition: 0.4s;
+}
+.flex {
+  display: flex;
+  gap: var(--gap, 5rem);
+}
+.logo {
+  margin-block: 1rem;
+  margin-inline: 0rem;
+}

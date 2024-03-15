@@ -1,0 +1,23 @@
+{
+    "contacto1": {
+      "titulo": "telefono",
+      "texto": "+123456789"
+    },
+    "contacto2": {
+      "titulo": "email",
+      "texto": "ejemplo1@email.com"
+    },
+    "contacto3": {
+      "titulo": "direccion",
+      "texto": "123 Calle Principal, Ciudad Ejemplo"
+    },
+    "contacto4": {
+      "titulo": "email",
+      "texto": "contacto@empresa.com"
+    },
+    "contacto5": {
+      "titulo": "telefono",
+      "texto": "+987654321"
+    }
+  }
+  
