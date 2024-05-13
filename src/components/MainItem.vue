@@ -38,7 +38,6 @@ wallResize(windowSize.value.width/windowSize.value.height);
 
 const handleResize = () => {
   windowSize.value = { width: window.innerWidth, height: window.innerHeight };
-  // console.log(windowSize.value.width, windowSize.value.height, windowSize.value.width/windowSize.value.height);
   var base = windowSize.value.width/windowSize.value.height;
   base = parseFloat(base).toFixed(2);
   wallResize(base);
@@ -94,8 +93,8 @@ onBeforeUnmount(() => {
   left: 0rem;
   padding-inline: 1rem;
   color: var(--vt-c-white);
-  font-family: "OktaNeue-Bold";
-  font-size: 4.5rem;
+  font-family: "OktaNeue-Normal";
+  font-size: 6rem;
   font-weight: bold;
   text-align: left;
   text-shadow: 2px 2px 10px black;

@@ -20,6 +20,32 @@ const data = props.data
 /* * {
     outline: 1px solid red;
 } */
+.container-central{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    padding-block: 1em;
+}
+@media (max-width: 70em){
+    .title{
+        font-weight: normal;
+    }
+}
+div.gallery-container{
+    align-items: center;
+    max-width: 70em;
+    flex-wrap: wrap;
+    --gap: 0;
+}
+@media (max-width: 65em){
+    dev.gallery-container{
+        --gap: 1rem;
+        padding: 0;
+    }
+}
 img{
     width: 100%;
     height: 100%;
@@ -33,30 +59,9 @@ div.img-container{
     overflow: hidden;
     background-color: rgba(255, 255, 255, 0.658);
 }
-
-div.gallery-container{
-    flex-wrap: wrap;
-    --gap: 0;
-}
 @media (max-width: 65em){
     div.img-container{
         min-width: 22em;
     }
-    dev.gallery-container{
-        --gap: 1rem;
-        padding: 0;
-    }
-}
-.title{
-    padding-block: 1em;
-}
-@media (max-width: 70em){
-    .title{
-        font-weight: normal;
-    }
-}
-.container-central{
-    max-width: 50em;
-    /* width: 200vw; */
 }
 </style>

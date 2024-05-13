@@ -29,9 +29,3 @@ a,
 span{
   user-select: var(--select, none);
 }
-span.title{
-  font-family: "OktaNeue-Bold";
-  font-size: 10rem;
-  /* font-weight: bold; */
-  text-transform: uppercase;
-}

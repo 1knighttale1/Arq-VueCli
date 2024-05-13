@@ -1,85 +1,88 @@
 <template>
   <Base>
     <template #header>
-      <MainItem/>
-      <LogoItem :type="typeLogo"/>
+      <MainItem />
+      <LogoItem :type="typeLogo" />
+    </template>
+    <template #description>
+      {{ intro }}
     </template>
     <template #body>
-      <div class="intro-estudio general disabled">
-        {{ intro }}
-      </div>
-      <PreviewItem :view="'projects'">
-          <template #title>Proyectos</template>
+      <PreviewItem :view="'projects'" :data="dataPage.proyectos" v-if="!loadingPage.proyectos">
+        <template #title>Proyectos</template>
       </PreviewItem>
-      <PreviewItem :view="'works'">
+      <PreviewItem :view="'works'" :data="dataPage.obras" v-if="!loadingPage.obras">
         <template #title>Obras</template>
+      </PreviewItem>
+      <PreviewItem :view="'aboutus'" :data="dataPage.estudio" v-if="!loadingPage.estudio">
+        <template #title>Estudio</template>
+        <template #content>descripcion estudio</template>
       </PreviewItem>
     </template>
   </Base>
 </template>
 
 <script setup>
-import Base from "../components/Base.vue";
-import LogoItem from '../components/LogoItem.vue';
-import MainItem from '../components/MainItem.vue';
-import PreviewItem from '../components/PreviewItem.vue';
+import Base from '../components/Base.vue'
+import LogoItem from '../components/LogoItem.vue'
+import MainItem from '../components/MainItem.vue'
+import PreviewItem from '../components/PreviewItems.vue'
 
-
-import { useViewsStore } from "../stores/views";
-import { useDataStore } from "../stores/data";
+import { useViewsStore } from '../stores/views'
+import { useDataStore } from '../stores/data'
 import { onMounted, ref } from 'vue'
 
 const storeViews = useViewsStore()
 const storeData = useDataStore()
-const typeLogo = ref('home');
+const typeLogo = ref('home')
 const view = ref({
-    name: '',
+  name: ''
 })
 storeViews.chanceView(view.value.name)
 
-const intro = ref("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas auctor pretium. Etiam vehicula imperdiet dictum. Duis lorem magna, commodo quis rutrum nec, rutrum et mauris. Ut vitae metus metus. In semper urna a erat tempus mollis. Mauris faucibus purus massa, eu eleifend elit porta ac. Aliquam sodales ut augue non molestie. Proin semper in ipsum eget lacinia. Phasellus eleifend erat ac libero placerat mollis. ");
+const intro = ref(
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas auctor pretium. Etiam vehicula imperdiet dictum. Duis lorem magna, commodo quis rutrum nec, rutrum et mauris. Ut vitae metus metus. In semper urna a erat tempus mollis. Mauris faucibus purus massa, eu eleifend elit porta ac. Aliquam sodales ut augue non molestie. Proin semper in ipsum eget lacinia. Phasellus eleifend erat ac libero placerat mollis. '
+)
 
-
-const loading = ref(true)
-const datos = ref('')
+const loadingPage = ref({
+  proyectos: true,
+  obras: true,
+  estudio: true
+})
+const dataPage = ref({
+  proyectos: Object,
+  obras: Object,
+  estudio: Object
+})
 
 onMounted(async () => {
   try {
-    await storeData.updateProjects()
-    // datos.value = storeData.data[view.value.name]
+    if (Object.keys(storeData.data['projects']).length === 0) {
+      await storeData.updateProjects()
+    }
   } finally {
-    loading.value = false;
+    loadingPage.value.proyectos = false
+    dataPage.value.proyectos = storeData.data['projects']
   }
   try {
-    await storeData.updateWorks()
-    // datos.value = storeData.data[view.value.name]
+    if (Object.keys(storeData.data['works']).length === 0) {
+      await storeData.updateWorks()
+    }
   } finally {
-    loading.value = false;
+    loadingPage.value.obras = false
+    dataPage.value.obras = storeData.data['works']
   }
   try {
-    await storeData.updateAboutUs()
-    // datos.value = storeData.data[view.value.name]
+    if (Object.keys(storeData.data['aboutus']).length === 0) {
+      await storeData.updateAboutUs()
+    }
   } finally {
-    loading.value = false;
+    loadingPage.value.estudio = false
+    dataPage.value.estudio = storeData.data['aboutus']
   }
-});
+})
 </script>
 
 <style scoped>
 /* text intro */
-.intro-estudio{
-    min-height: 50vh;
-    padding-block: 10rem;
-    padding-inline: 1.5rem;
-    font-size: large;
-    font-weight: bold;
-    text-align: justify;
-    background-color: var(--color-background-contraste);
-}
-@media (max-width: 65em){
-    .intro-estudio{
-        font-size: large;
-    }
-    
-}
 </style>

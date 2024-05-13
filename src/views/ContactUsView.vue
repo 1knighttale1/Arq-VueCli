@@ -1,25 +1,33 @@
 <template>
-    <Base :title="title">
-        <template #title>
-            <h3 class="sub-title">{{ "contactos".toUpperCase() }}</h3>
-        </template>
-    </Base>
+  <Base>
+    <template #title> contactos </template>
+  </Base>
 </template>
-
-<script setup>
+  
+  <script setup>
 import Base from '../components/Base.vue'
-import { useViewsStore } from "../stores/views";
-import { useDataStore } from "../stores/data";
-import { ref } from 'vue'
+import ViewItems from '../components/ViewItems.vue'
+import { useViewsStore } from '../stores/views'
+import { useDataStore } from '../stores/data'
+import { onMounted, ref } from 'vue'
 
-const view = ref({
-    name: 'contacts',
-    galery: false
-})
 const storeViews = useViewsStore()
 const storeData = useDataStore()
-const title = ref('contactos');
+const data = ref('')
+// control de vistas
+const view = ref({
+  name: 'contacts'
+})
 
-storeViews.chanceView(view.value.name, view.value.galery)
-storeData.updateContacts()
+storeViews.chanceView(view.value.name)
+// control de data proyectos
+onMounted(async () => {
+  try {
+    if (Object.keys(storeData.data[view.value.name]).length === 0) {
+      await storeData.updateContacts()
+    }
+    data.value = storeData.data[view.value.name]
+  } finally {
+  }
+})
 </script>

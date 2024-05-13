@@ -50,7 +50,7 @@ let id = 0
 const menus = ref([
   { id: id++, text: 'PROYECTOS', url: '/projects', active:  'projects'},
   { id: id++, text: 'OBRAS', url:'/works', active: 'works' },
-  { id: id++, text: 'NOSOTROS', url:'/aboutus', active: 'aboutus' },
+  { id: id++, text: 'ESTUDIO', url:'/aboutus', active: 'aboutus' },
   { id: id++, text: 'CONTACTOS', url:'/contacts', active: 'contacts' },
 ])
 function isActive(menu){  return store.view.name == menu;};
